@@ -1,0 +1,11 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.squirtle.test.main.mapper.SysUserMapper">
+
+    <select id="selectUserById" resultType="com.squirtle.test.main.entity.SysUser">
+        select * from sys_user where id = #{id}
+    </select>
+
+    <select id="findByUsername" resultType="com.squirtle.test.main.entity.SysUser">
+        select * from sys_user where user_name = #{userName}
+    </select>
+</mapper>
