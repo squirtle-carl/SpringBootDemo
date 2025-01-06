@@ -1,0 +1,3 @@
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+com.carl.squirtle.mian.config.failureAnalyzer.NullPointerFailureAnalyzer,\
+com.carl.squirtle.mian.config.failureAnalyzer.RequiredPropertyFailureAnalyzer
