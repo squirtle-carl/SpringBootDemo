@@ -1,0 +1,66 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /
+  undertow:
+    threads:
+      io: 16
+      worker: 256
+    buffer-size: 1024
+    direct-buffers: true
+  #  jetty:
+  #    threads:
+  #      max: 200  # 设置最大线程数
+  #      min: 10  # 设置最小线程数
+  #      acceptors: 2  # 用于接收请求的线程数
+  #      selectors: 4  # 用于处理非阻塞IO线程数
+  #      max-queue-capacity: 10 # 请求队列最大长度
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: Caihuaxin@2024
+      initial-size: 5 #初始化建立连接池连接个数
+      min-idle: 5 #最小连接池数量
+      max-active: 20 #最大连接池数量
+      max-wait: 6000 #最大连接池等待时间，单位毫秒
+      ##配置可视化控制台页面
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        allow:
+          - 127.0.0.1
+        reset-enable: true
+        login-username: admin
+        login-password: admin
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.css,*.gif,*.jpg,*.bmp,*.png,*.ico
+      default-auto-commit: true
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'safeAPI'
+      paths-to-match: '/safeRest/**'
+      packages-to-scan: com.squirtle.test.main.controller
+    - group: 'openAPI'
+      paths-to-match: '/openRest/**'
+      packages-to-scan: com.squirtle.test.main.api
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+#    enable-swagger-models: false
+    swagger-model-name: 实体类列表
+logging:
+  level:
+    com.alibaba.druid: debug
